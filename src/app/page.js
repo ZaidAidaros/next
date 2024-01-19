@@ -27,7 +27,7 @@ export default function Home() {
         </button>
       </div>
 
-      <div className="flex flex-col rounded-2xl border-2 border-green-500 h-16 p-2">
+      <div className="flex flex-col rounded-2xl border-2 border-green-500 h-16 p-2 text-white">
         {user && (
           <div>
             <p>{user.email}</p>

@@ -6,6 +6,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import BtnLoading from "@/app/components/btnloading";
 import Message from "@/app/components/message";
 import Link from "next/link";
+import { FirebaseError } from "firebase/app";
 
 function Page() {
   const [email, setEmail] = React.useState("");
@@ -25,18 +26,20 @@ function Page() {
     const { result, error } = await signUp(email, password);
     setLoading(false);
     if (error) {
-      if (error.message === "Firebase: Error (auth/user-not-found).") {
-        setErr("Wrong Credentials");
+      if (String(error).includes("auth/email-already-in-use")) {
+        setErr("Wrong Email Or Password Or Both.");
       } else {
         setErr("There is a problem..");
       }
+
       return;
     }
+
     // router.push("/");
   };
   return (
-    <main className="bg-gray-500 min-h-screen flex flex-col items-center justify-center w-full py-8">
-      <div className="bg-gray-100 flex flex-col items-center justify-center rounded-3xl shadow-5xl w-1/2 mx-auto py-10">
+    <main className="bg-gray-500 min-h-screen flex flex-col items-center justify-center  py-8">
+      <div className="bg-gray-100 flex flex-col items-center justify-center sm:w-2/3 w-full rounded-3xl shadow-5xl mx-auto py-10">
         <div>
           <h1 className="text-green-500 my-2">Sign Up</h1>
         </div>

@@ -27,8 +27,11 @@ function Page() {
     const { result, error } = await signIn(email, password);
     setLoading(false);
     if (error) {
-      if (error.message === "Firebase: Error (auth/user-not-found).") {
-        setErr("Wrong Credentials");
+      if (
+        String(error).includes("auth/invalid-credential") ||
+        String(error).includes("auth/user-not-found")
+      ) {
+        setErr("Wrong Email Or Password Or Both.");
       } else {
         setErr("There is a problem..");
       }
@@ -40,13 +43,13 @@ function Page() {
   };
   return (
     <main className="bg-gray-500 flex flex-col min-h-screen items-center justify-center w-full py-8">
-      <div className="bg-gray-100 flex flex-col items-center justify-center rounded-3xl shadow-5xl w-1/2 mx-auto pa-10">
+      <div className="bg-gray-100 flex flex-col items-center justify-center rounded-3xl shadow-5xl sm:w-2/3 w-full mx-auto py-10">
         <div>
           <h1 className="text-green-500 my-2">Sign In</h1>
         </div>
         <form
           onSubmit={handleForm}
-          className="form items-center rounded-xl w-1/2 border-2 border-green-500 h-full my-10 mx-auto px-4 py-2">
+          className="form items-center rounded-xl w-1/2 border-2 border-green-500 h-full my-10 mx-auto p-2">
           <div>
             <label htmlFor="email">
               <p>Email</p>
