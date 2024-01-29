@@ -18,7 +18,7 @@ export default function LogInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [fLoading, setFLoading] = useState(false);
+  // const [fLoading, setFLoading] = useState(false);
   const [state, setState] = useState({ state: false, msg: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
 
@@ -31,7 +31,6 @@ export default function LogInForm() {
     }
   }, []);
   const sendResetReq = async () => {
-    router.push("auth/forgetpassword?email=" + email);
     // setState({});
     // if (email) {
     //   setFLoading(true);
@@ -129,7 +128,7 @@ export default function LogInForm() {
           <div className="flex flex-col justify-around mb-2">
             <Message msg={state.msg} err={!state.state} />
             <div className="flex justify-end text-blue-500">
-              <Link href={"/auth/forgetpassword?email=" + email}>
+              <Link href={"/auth/forgetpassword?email='" + email + "'"}>
                 forget password
               </Link>
             </div>

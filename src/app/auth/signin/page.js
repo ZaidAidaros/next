@@ -1,10 +1,8 @@
-const { default: LogInForm } = require("@/app/components/loginform");
-
-function Page() {
+import LogInForm from "@/app/components/loginform";
+export default function Page() {
   return (
     <div>
       <LogInForm />
     </div>
   );
 }
-export default Page;

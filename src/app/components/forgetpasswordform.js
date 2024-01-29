@@ -5,6 +5,7 @@ import BtnLoading from "@/app/components/btnloading";
 import Message from "@/app/components/message";
 import sendResetPasswordEmailLink from "@/firebase/auth/resetpasswordreq";
 import emailPasswordValidate from "@/tools/emailPasswordValidate";
+import Link from "next/link";
 
 export default function ForgetPasswordForm() {
   const [email, setEmail] = useState("");
@@ -28,12 +29,13 @@ export default function ForgetPasswordForm() {
       const { result, error } = await sendResetPasswordEmailLink(email);
       setLoading(false);
       if (error) {
-        setState({ state: false, msg: "Unknow Error" });
+        setState({ state: false, msg: "Unknown Error" });
       } else {
         setState({ state: true, msg: "We Sent You Reset Email Link." });
       }
     }
   };
+
   return (
     <main className="bg-gray-500 flex flex-col min-h-screen items-center justify-center w-full py-8">
       <div className="bg-gray-100 flex flex-col items-center justify-center rounded-3xl shadow-5xl sm:w-2/3 w-full mx-auto py-10">
@@ -73,6 +75,10 @@ export default function ForgetPasswordForm() {
             </button>
           </div>
         </form>
+        <div className="flex items-center justify-between w-1/2 text-blue-500 my-4 px-4">
+          <Link href="/auth/signup">Sign Up</Link>
+          <Link href="/auth/signin">Sign In</Link>
+        </div>
       </div>
     </main>
   );
